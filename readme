@@ -1,156 +1,94 @@
-Introduction
-Core Open-Source ASR Frameworks
-Useful Toolkits & Libraries
-High-Quality Datasets
-Pre-trained Models & Model Hubs
-Real-World Application Scenarios
-Learning Resources (Tutorials, Books, Courses)
-Industry & Academic Updates
-Contribution Guidelines
-Disclaimer
-Introduction
-Automatic Speech Recognition (ASR), also known as Speech-to-Text (STT), is a subfield of speech processing and natural language processing (NLP) that enables machines to transcribe human speech into text. It powers applications like voice assistants, real-time subtitles, and meeting transcription.
-This Awesome list aims to collect well-maintained, high-impact, and accessible resources for ASR, covering both research and engineering use cases. Whether you're a beginner looking to build your first ASR app or a researcher exploring cutting-edge techniques, you'll find relevant tools here.
-Core Open-Source ASR Frameworks
-These frameworks are the backbone of most ASR systems, providing end-to-end pipelines (or modular components) for training, inference, and deployment.
-Framework	Maintainer	Key Features	Supported Languages	GitHub Link	Use Case Priority
-Whisper	OpenAI	- End-to-end multilingual ASR
-- Zero-shot transfer to low-resource langs
-- Pre-trained models (tiny → large)
-- Supports transcription + translation	100+ languages (including Chinese, English, Spanish)	openai/whisper	Beginners, Real-world apps
-Wav2Vec 2.0	Meta (Facebook)	- Self-supervised learning (no transcribed data needed for pre-training)
-- State-of-the-art (SOTA) on English benchmarks
-- Integrates with Hugging Face	English, multilingual variants available	facebookresearch/wav2vec2-base	Research, High-accuracy apps
-Kaldi	Community ( Johns Hopkins )	- Modular, research-focused
-- Supports custom feature extraction & acoustic models
-- Extensive tooling for low-resource languages	Multilingual (via custom data)	kaldi-asr/kaldi	Research, Custom systems
-PaddleSpeech	Baidu	- Optimized for Chinese ASR
-- Out-of-the-box demos (transcription, TTS)
-- Supports deployment (ONNX, TensorRT)
-- Rich pre-trained models	Chinese (primary), English	PaddlePaddle/PaddleSpeech	Chinese apps, Production
-ESPnet	Community (Nagoya Univ. et al.)	- End-to-end ASR/TTS/S2S
-- Supports multi-task learning (e.g., ASR + speaker diarization)
-- SOTA on multiple benchmarks	Multilingual	espnet/espnet	Research, Complex pipelines
-NVIDIA NeMo	NVIDIA	- GPU-optimized for speed/scalability
-- Pre-trained models for ASR, NLP, TTS
-- Easy deployment (TorchScript, ONNX)	English, Chinese, Spanish, etc.	NVIDIA/NeMo	Production, GPU-accelerated apps
-Useful Toolkits & Libraries
-These auxiliary tools simplify common ASR workflows (e.g., audio processing, real-time inference, feature extraction).
-1. Audio Processing
-librosa: A Python library for audio and music analysis (e.g., feature extraction like MFCCs, mel-spectrograms). Essential for custom ASR pipelines.
-librosa/librosa
-pydub: Simple audio manipulation (e.g., converting formats, trimming, volume adjustment) for preprocessing raw audio.
-jiaaro/pydub
-FFmpeg: A cross-platform tool for audio/video conversion (required by Whisper, pydub, and most ASR frameworks for handling different audio formats like MP3, WAV).
-FFmpeg/FFmpeg
-2. Real-Time ASR
-Vosk: Lightweight, offline real-time ASR library with pre-trained models for 20+ languages. Ideal for edge devices (e.g., Raspberry Pi).
-alphacephei/vosk
-Whisper.cpp: C/C++ port of Whisper for low-latency, offline inference on edge devices (no Python dependency).
-ggerganov/whisper.cpp
-3. Deployment & Optimization
-ONNX Runtime: Accelerate ASR model inference (supports Whisper, Wav2Vec 2.0, NeMo models) across CPUs, GPUs, and edge devices.
-microsoft/onnxruntime
-TensorRT: NVIDIA's optimization toolkit for GPU inference (speeds up NeMo/Whisper models by 2–5x in production).
-NVIDIA/TensorRT
-High-Quality Datasets
-ASR model performance depends heavily on training data. Below are curated datasets for different languages, scales, and use cases.
-1. General-Purpose Datasets
-Dataset Name	Language	Size	Description	Download Link
-LibriSpeech	English	1000+ hours	Clean/noisy speech from audiobooks; the "gold standard" for English ASR.	LibriSpeech Corpus
-Common Voice	100+ langs	10k+ hours	Crowdsourced, open dataset by Mozilla (includes low-resource languages).	Mozilla Common Voice
-TED-Lium 3	English	452 hours	Speech from TED Talks (with transcripts and speaker IDs).	TED-Lium 3
-2. Chinese-Specific Datasets
-Dataset Name	Size	Description	Download Link
-AISHELL-1	178 hours	Clean Mandarin speech from 400 speakers (common for Chinese ASR benchmarks).	AISHELL-1
-AISHELL-2	1000 hours	Larger Mandarin dataset (1990 speakers) with diverse accents.	AISHELL-2
-THCHS-30	30 hours	Mandarin speech from 10 speakers (small but widely used for quick prototyping).	THCHS-30
-3. Domain-Specific Datasets
-MedSpeech: Medical ASR datasets (e.g., doctor-patient conversations, medical terms).
-MedSpeech Corpus
-VOiCES: Noisy speech for automotive/telecom scenarios (simulates background noise like traffic).
-VOiCES Corpus
-TIMIT: Phoneme-level labeled dataset (for research on acoustic modeling).
-TIMIT Corpus
-Pre-Trained Models & Model Hubs
-Instead of training from scratch, use these pre-trained models for quick inference or fine-tuning.
-1. Key Model Hubs
-Hugging Face Hub: The largest hub for ASR models (supports Whisper, Wav2Vec 2.0, ESPnet, and custom models). Filter by language, accuracy, and size.
-Hugging Face ASR Models
-Paddle Model Zoo: Pre-trained Chinese ASR models (e.g., PaddleSpeech's "conformer_wenetspeech" for high-accuracy Mandarin).
-PaddleSpeech Model Zoo
-NVIDIA NGC Catalog: Optimized NeMo ASR models for production (e.g., "stt_en_conformer_ctc_large").
-NVIDIA NGC ASR Models
-2. Popular Pre-Trained Models
-Whisper Models: OpenAI's official models (tiny → large-v3) for multilingual transcription. Use whisper Python package to load directly.
-Whisper Model Docs
-Wav2Vec 2.0 Multilingual: Meta's model for 100+ languages (e.g., facebook/wav2vec2-large-xlsr-53 on Hugging Face).
-WenetSpeech Models: SOTA Chinese ASR models (used in PaddleSpeech and ESPnet).
-Real-World Application Scenarios
-Learn how ASR is applied in production, with example tech stacks.
-Real-Time Subtitles:
-Use Case: Live streams, videos, or in-person events.
-Tech Stack: Whisper (transcription) + Flask/FastAPI (backend) + React (frontend).
-Example: Whisper Subtitle Generator
-Meeting Transcription:
-Use Case: Record and transcribe meetings with speaker diarization.
-Tech Stack: Whisper (transcription) + Pyannote Audio (speaker diarization) + Notion API (export notes).
-Example: Meeting Transcription with Whisper
-Voice Assistants:
-Use Case: Smart home devices (e.g., "turn on the light").
-Tech Stack: Vosk (real-time ASR) + Rasa (intent recognition) + MQTT (device control).
-Accessibility Tools:
-Use Case: Real-time text for deaf/hard-of-hearing users.
-Tech Stack: Whisper.cpp (low-latency) + Electron (desktop app).
-Learning Resources (Tutorials, Books, Courses)
-1. Beginner-Friendly Tutorials
-Hugging Face ASR Guide: Step-by-step guide to using Whisper/Wav2Vec 2.0 for transcription (with code snippets).
-Hugging Face ASR Tutorial
-PaddleSpeech Quick Start: Build a Chinese ASR app in 10 minutes (no prior experience needed).
-PaddleSpeech Quick Start
-Whisper Official Demo: Run Whisper locally with a single Python command (supports audio files/YouTube links).
-Whisper Demo
-2. Books
-《Speech and Language Processing》(3rd ed.): Chapter 10 covers ASR fundamentals (acoustic models, language models). Free online.
-Speech and Language Processing
-《Automatic Speech Recognition: A Deep Learning Approach》: Focuses on modern deep learning-based ASR (Wav2Vec 2.0, end-to-end models).
-3. Courses
-CS224S (Stanford): Deep Learning for Speech and Language Processing (covers ASR, TTS, and speech synthesis).
-CS224S Lectures
-Coursera: Speech Recognition for Developers: Practical course on building ASR apps with Google Cloud Speech-to-Text (intro to cloud-based ASR).
-Coursera Course
-4. Research Papers (Key Reads)
-Whisper: Robust Speech Recognition via Large-Scale Supervised Training (OpenAI, 2022)
-arXiv:2212.04356
-wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations (Meta, 2020)
-arXiv:2006.11477
-End-to-End Speech Recognition with Transformer Models (ESPnet Team, 2019)
-arXiv:1904.11660
-Industry & Academic Updates
-Stay updated with the latest ASR trends, benchmarks, and community events.
-1. Benchmarks
-LibriSpeech WER: Track SOTA ASR accuracy on English LibriSpeech (word error rate, WER).
-LibriSpeech Leaderboard
-AISHELL-1 CER: Leaderboard for Chinese ASR (character error rate, CER).
-AISHELL-1 Leaderboard
-2. Conferences & Workshops
-Interspeech: The largest annual conference on speech processing (includes ASR research).
-Interspeech
-ICASSP: IEEE International Conference on Acoustics, Speech, and Signal Processing (top ASR venue).
-ICASSP
-ASRU: IEEE Workshop on Automatic Speech Recognition and Understanding (focused on ASR practice).
-3. Community & Newsletters
-Reddit r/speechrecognition: Community for ASR questions, projects, and news.
-r/speechrecognition
-Speech and Language Technology Newsletter: Curated updates on ASR, NLP, and TTS.
-SLT Newsletter
-Contribution Guidelines
-We welcome contributions to make this list more comprehensive! To add a resource:
-Ensure the resource is open-source, well-maintained, and relevant to ASR (no closed-source tools unless they are widely used and free for non-commercial use).
-Follow the existing format for consistency (e.g., frameworks use tables, tools use bullet points with links).
-Submit a Pull Request (PR) with a clear description of the resource and why it should be included.
-Avoid duplicates (search the list first to check if the resource already exists).
-Disclaimer
-All resources listed are owned by their respective maintainers. This list is for informational purposes only and does not endorse any specific tool or framework.
-ASR technology is rapidly evolving; some resources may be deprecated over time. Please check the original GitHub repos/docs for the latest updates.
-For commercial use, review the license of each resource (e.g., Whisper uses MIT License, Kaldi uses Apache 2.0).
+# 🎙️ Speech Recognition Overview  
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Made with](https://img.shields.io/badge/Made%20with-Python-orange.svg)](https://www.python.org/)
+[![Paper](https://img.shields.io/badge/Survey-Paper-red)](#参考资料)
+
+语音识别（Speech Recognition, ASR, Automatic Speech Recognition）是人工智能中最重要的分支之一，旨在**将人类语音信号转化为文本**。  
+近年来，随着深度学习和大规模预训练模型的发展，语音识别的准确率和应用范围都得到了显著提升。
+
+---
+
+## 📌 目录
+- [背景与发展](#背景与发展)
+- [主流方法](#主流方法)
+- [常用数据集](#常用数据集)
+- [开源工具与框架](#开源工具与框架)
+- [应用场景](#应用场景)
+- [参考资料](#参考资料)
+
+---
+
+## 🚀 背景与发展
+语音识别的发展历程大致可以分为以下阶段：
+
+1. **基于模板匹配 (1950s-1970s)**  
+   - 动态时间规整 (Dynamic Time Warping, DTW)  
+   - 早期的小词汇识别系统  
+
+2. **统计建模时代 (1980s-2000s)**  
+   - 隐马尔可夫模型 (Hidden Markov Model, HMM)  
+   - 高斯混合模型 (Gaussian Mixture Model, GMM)  
+   - 代表系统：CMU Sphinx  
+
+3. **深度学习时代 (2010s-)**  
+   - 深度神经网络 (DNN) 替代 GMM  
+   - 循环神经网络 (RNN, LSTM, GRU)  
+   - CTC (Connectionist Temporal Classification) & Attention 机制  
+
+4. **端到端与预训练大模型 (2020s-)**  
+   - Transformer, Conformer 架构  
+   - 自监督预训练模型（Wav2Vec2.0, HuBERT, Whisper）  
+   - 跨模态大模型推动语音-文本-视觉的统一  
+
+---
+
+## 🧠 主流方法
+| 方法类别 | 代表模型 | 特点 |
+|----------|----------|------|
+| HMM-GMM | CMU Sphinx | 经典方法，低资源场景仍可用 |
+| DNN-HMM | Kaldi | 声学建模提升，工业界广泛应用 |
+| CTC | DeepSpeech | 端到端，省去对齐步骤 |
+| Attention | Listen, Attend and Spell (LAS) | 利用注意力捕捉长依赖 |
+| Transformer/Conformer | ESPnet, SpeechBrain | 并行训练，高性能 |
+| 自监督预训练 | Wav2Vec2.0, HuBERT, Whisper | 利用未标注数据，跨语言迁移 |
+
+---
+
+## 📊 常用数据集
+| 数据集 | 语言 | 大小 | 链接 |
+|--------|------|------|------|
+| [LibriSpeech](https://www.openslr.org/12) | 英语 | 1000h | 标准基准 |
+| [TED-LIUM](https://www.openslr.org/19) | 英语 | 452h | 演讲数据 |
+| [AISHELL-1](https://www.openslr.org/33) | 中文 | 178h | 开源中文语音 |
+| [Common Voice](https://commonvoice.mozilla.org/) | 多语言 | >7000h | 社区贡献 |
+| [GigaSpeech](https://github.com/SpeechColab/GigaSpeech) | 英语 | 10000h | 大规模开源语音 |
+
+---
+
+## 🛠️ 开源工具与框架
+- [Kaldi](https://kaldi-asr.org/) - 传统/混合方法的经典工具包  
+- [ESPnet](https://github.com/espnet/espnet) - 端到端语音处理框架  
+- [SpeechBrain](https://speechbrain.github.io/) - PyTorch 语音工具包  
+- [OpenAI Whisper](https://github.com/openai/whisper) - 多语言通用语音识别模型  
+- [NVIDIA NeMo](https://github.com/NVIDIA/NeMo) - 大规模语音模型训练  
+
+---
+
+## 📱 应用场景
+- **语音助手**（Siri, Alexa, 小爱同学）  
+- **实时字幕与翻译**（会议转写，跨语言交流）  
+- **无障碍服务**（听障人士辅助工具）  
+- **车载系统**（语音导航与控制）  
+- **智能客服与质检**（语音工单、呼叫中心）  
+
+---
+
+## 📖 参考资料
+- 📘 Jurafsky, D., & Martin, J. H. *Speech and Language Processing* (3rd Edition draft) [[link](https://web.stanford.edu/~jurafsky/slp3/)]  
+- 📘 Li, Jinyu, et al. "A Survey on Recent Deep Learning for ASR." *IEEE Transactions on Audio, Speech, and Language Processing* (2021). [[arXiv](https://arxiv.org/abs/2007.09192)]  
+- 📘 Baevski, Alexei, et al. "wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations." *NeurIPS 2020*. [[paper](https://arxiv.org/abs/2006.11477)]  
+- 📘 Radford, Alec, et al. "Robust Speech Recognition via Large-Scale Weak Supervision." *OpenAI Whisper* (2022). [[GitHub](https://github.com/openai/whisper)]  
+
+---
+
+💡 如果你对 **语音识别综述** 感兴趣，可以 Star ⭐ 本项目，或提交 PR 补充更多内容！
