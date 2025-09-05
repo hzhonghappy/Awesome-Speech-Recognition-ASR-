@@ -1,7 +1,7 @@
 # 🎙️ Speech Recognition Overview  
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Made with](https://img.shields.io/badge/Made%20with-Python-orange.svg)](https://www.python.org/)
-[![Paper](https://img.shields.io/badge/Survey-Paper-red)](#参考资料)
+[![Paper](https://img.shields.io/badge/Survey-Paper-red)]
 
 语音识别（Speech Recognition, ASR, Automatic Speech Recognition）是人工智能中最重要的分支之一，旨在**将人类语音信号转化为文本**。  
 近年来，随着深度学习和大规模预训练模型的发展，语音识别的准确率和应用范围都得到了显著提升。
