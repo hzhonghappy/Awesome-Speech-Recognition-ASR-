@@ -89,6 +89,5 @@
 - 📘 Baevski, Alexei, et al. "wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations." *NeurIPS 2020*. [[paper](https://arxiv.org/abs/2006.11477)]  
 - 📘 Radford, Alec, et al. "Robust Speech Recognition via Large-Scale Weak Supervision." *OpenAI Whisper* (2022). [[GitHub](https://github.com/openai/whisper)]  
 
----
 
 💡 如果你对 **语音识别综述** 感兴趣，可以 Star ⭐ 本项目，或提交 PR 补充更多内容！
